@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="number" id="in_a" value="10">+
+  <input type="number" id="in_b" value="20">
+  <button onclick="loadData()">=</button>
+  <div id="info"></div>
+
+  <script>
+    function loadData(){
+      
+      const a = document.querySelector('#in_a').value;
+      const b = document.querySelector('#in_b').value;
+
+      console.log('a');
+      fetch(`1002-11-a-plus-b.php?a=${a}&b=${b}`,{method:"get"}) // 第二個參數是物件，預設的方法是{method:"get"} 可省略
+      .then((response)=>{
+        console.log('b');
+        console.log({response});
+        return response.text();
+      })
+      .then((txt)=>{
+        console.log('c');
+        document.querySelector('#info').innerHTML=txt;
+      })
+      .catch(ex=>console.log(ex));
+      console.log('d')
+      
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表單</title>
+</head>
+
+<body>
+  <form action="" name="form1" method="post" onsubmit="showData(event)">
+    <input type="text" id="account" name="account" placeholder="帳號"><br>
+    <input type="password" id="password" name="password" placeholder="密碼">
+    <button type="button" onclick="changeType()">p</button><br>
+    <input type="submit"><br>
+  
+    <!-- button 如果在表單裡,預設為 submit button -->
+  </form>
+
+  <script>
+    function showData(e){
+      e.preventDefault(); // 讓表單不要送出
+      console.log(document.form1.account.value);
+      console.log(document.form1.password.value);
+    }
+
+    function changeType(){
+      const p_input=document.form1.password;
+      const t =p_input.getAttribute("type");
+      if(t==="password"){
+        p_input.setAttribute("type","text");
+      }else{
+        p_input.setAttribute("type","password");
+      }
+    }
+  </script>
+</body>
+
+</html>

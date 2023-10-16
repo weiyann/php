@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="loadData()">load</button>
+  <div id="info"></div>
+
+  <script>
+    function loadData(){
+      const xhr =new XMLHttpRequest(); // step 1 建立物件
+      console.log('a');
+      // step 2 定義事件處理器
+      xhr.onload=function(){
+        console.log('b');
+        console.log(xhr.responseText);
+        document.querySelector('#info').innerHTML=xhr.responseText;
+      };
+      // step 3 設定
+      xhr.open("GET","1002-11-a-plus-b.php?a=5&b=10");
+      // step 4 發送
+      xhr.send();
+      console.log('c');
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表單</title>
+</head>
+
+<body>
+  <form action="" name="form1" method="post">
+    <input type="text" id="account" name="account" placeholder="帳號"><br>
+    <input type="password" id="password" name="password" placeholder="密碼"><br>
+    <input type="submit"><br>
+    <button type="button" onclick="showData()">測試按鈕</button>
+    <!-- button 如果在表單裡,預設為 submit button，如果不要submit要加上 type="button" -->
+  </form>
+
+  <script>
+    function showData(){
+      console.log(document.form1.account.value);
+      console.log(document.form1.password.value);
+    }
+  </script>
+</body>
+
+</html>
