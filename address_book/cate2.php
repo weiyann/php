@@ -20,9 +20,9 @@ $rows = $pdo->query($sql)->fetchAll();
           <h5 class="card-title">表單</h5>
 
           <form name="form1" onsubmit="return false">
-            <div class="mb-3">
-              <label for="name" class="form-label">主分類</label>
-              <select class="form-select">
+            <div class="input-group mb-3">
+            <span class="input-group-text">主分類</span>
+              <select class="form-select" name="cate1" id="cate1" onchange="generateCate2List()">
                 <?php foreach ($rows as $r) :
                   if ($r['parent_sid'] == '0') : ?>
                     <option value="<?= $r['sid'] ?>"><?= $r['name'] ?></option>
@@ -30,6 +30,10 @@ $rows = $pdo->query($sql)->fetchAll();
                   endif;
                 endforeach ?>
               </select>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">次分類</span>
+              <select class="form-select" name="cate2" id="cate2"></select>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -41,5 +45,24 @@ $rows = $pdo->query($sql)->fetchAll();
 </div>
 
 <?php include './parts/scripts.php' ?>
+<script>
+  const cates = <?= json_encode($rows, JSON_UNESCAPED_UNICODE) ?>;
 
+  const cate1 = document.querySelector('#cate1');
+  const cate2 = document.querySelector('#cate2');
+
+  function generateCate2List() {
+    const cate1Val = cate1.value; // 主分類的值
+
+    let str = "";
+    for (let item of cates) {
+      if (+item.parent_sid === +cate1Val) {
+        str += `<option value="${item.sid}">${item.name}</option>`;
+      }
+    }
+
+    cate2.innerHTML = str;
+  }
+generateCate2List(); //一進來就呼叫
+</script>
 <?php include './parts/html_foot.php' ?>
