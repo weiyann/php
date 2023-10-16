@@ -100,7 +100,7 @@ $rows = $pdo->query($sql)->fetchAll();
               <td><?= $r['birthday'] ?></td>
               <td><?= htmlentities($r['address']) ?>
               <?= strip_tags($r['address']) ?></td>
-              <td><a href="edit.php?sid<?= $r['sid'] ?>">
+              <td><a href="edit.php?sid=<?= $r['sid'] ?>">
               <i class="fa-solid fa-file-pen text-success"></i>
               </a></td>
 
