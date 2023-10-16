@@ -16,8 +16,8 @@ $title = '新增'
 
 <div class="container">
   <div class="row">
-    <div class="col6">
-      <div class="card" style="width: 18rem;">
+    <div class="col-6">
+      <div class="card">
 
         <div class="card-body">
           <h5 class="card-title">新增資料</h5>
