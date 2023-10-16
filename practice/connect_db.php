@@ -14,3 +14,7 @@ $pdo_options = [
 
 $pdo = new PDO($dsn, $db_user, $db_pass, $pdo_options);
 
+// 如果沒有session啟動session
+if(!isset($_SESSION)){
+  session_start();
+}
