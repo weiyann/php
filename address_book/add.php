@@ -93,19 +93,19 @@ $title = '新增'
 
     // TODO: 資料在送出之前, 要檢查格式
     let isPass = true; // 有沒有通過檢查
-/*
-    if (name_in.value.length < 2) {
-      isPass = false;
-      name_in.style.border = '2px solid red';
-      name_in.nextElementSibling.innerHTML = '請填寫正確的姓名';
-    }
+    /*
+        if (name_in.value.length < 2) {
+          isPass = false;
+          name_in.style.border = '2px solid red';
+          name_in.nextElementSibling.innerHTML = '請填寫正確的姓名';
+        }
 
-    if (!validateEmail(email_in.value)) {
-      isPass = false;
-      email.style.border = '2px solid red';
-      email.nextElementSibling.innerHTML = '請填寫正確的 Email';
-    }
-*/
+        if (!validateEmail(email_in.value)) {
+          isPass = false;
+          email.style.border = '2px solid red';
+          email.nextElementSibling.innerHTML = '請填寫正確的 Email';
+        }
+    */
     // 非必填
     if (mobile_in.value && !validateMobile(mobile_in.value)) { //如果有值但不符合格式就錯誤，沒有值就不執行這個if
       isPass = false;
@@ -128,11 +128,19 @@ $title = '新增'
         console.log({
           data
         });
-        if(data.success){
+        if (data.success) {
           alert('資料新增成功');
-          location.href="./list.php"
-        }else{
-          alert('發生問題')
+          location.href = "./list.php"
+        } else {
+          // alert('發生問題')
+          for (let n in data.errors) {
+            console.log(`n:${n}`);
+            if (document.form1[n]) {
+              const input = document.form1[n];
+              input.style.border = '2px solid red';
+              input.nextElementSibling.innerHTML = data.errors[n];
+            }
+          }
         }
       })
       .catch(ex => console.log(ex))
