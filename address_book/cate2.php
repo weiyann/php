@@ -46,6 +46,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
 <?php include './parts/scripts.php' ?>
 <script>
+  const initVals = {cate1:2, cate2:16};
   const cates = <?= json_encode($rows, JSON_UNESCAPED_UNICODE) ?>;
 
   const cate1 = document.querySelector('#cate1');
@@ -56,13 +57,15 @@ $rows = $pdo->query($sql)->fetchAll();
 
     let str = "";
     for (let item of cates) {
-      if (+item.parent_sid === +cate1Val) {
+      if (+item.parent_sid === +cate1Val) { // 如果item的parent_sid = 主分類的值
         str += `<option value="${item.sid}">${item.name}</option>`;
       }
     }
 
-    cate2.innerHTML = str;
+    cate2.innerHTML = str; // 寫進次分類
   }
-generateCate2List(); //一進來就呼叫
+  cate1.value=initVals.cate1; //設定第一層初始值
+  generateCate2List(); //一進來就呼叫
+  cate2.value=initVals.cate2; //設定第二層初始值
 </script>
 <?php include './parts/html_foot.php' ?>
