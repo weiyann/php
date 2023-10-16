@@ -27,6 +27,9 @@ if(!isset($pageName)){
             <li class="nav-item">
               <a class="nav-link <?= $pageName=='add' ? 'active':'' ?>" href="add.php">新增</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link <?= $pageName=='cate2' ? 'active':'' ?>" href="cate2.php">二層選單</a>
+            </li>
             
             
           </ul>
