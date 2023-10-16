@@ -93,7 +93,7 @@ $title = '新增'
 
     // TODO: 資料在送出之前, 要檢查格式
     let isPass = true; // 有沒有通過檢查
-
+/*
     if (name_in.value.length < 2) {
       isPass = false;
       name_in.style.border = '2px solid red';
@@ -105,7 +105,7 @@ $title = '新增'
       email.style.border = '2px solid red';
       email.nextElementSibling.innerHTML = '請填寫正確的 Email';
     }
-
+*/
     // 非必填
     if (mobile_in.value && !validateMobile(mobile_in.value)) { //如果有值但不符合格式就錯誤，沒有值就不執行這個if
       isPass = false;
@@ -131,6 +131,8 @@ $title = '新增'
         if(data.success){
           alert('資料新增成功');
           location.href="./list.php"
+        }else{
+          alert('發生問題')
         }
       })
       .catch(ex => console.log(ex))
