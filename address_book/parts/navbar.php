@@ -1,9 +1,8 @@
-<?
+<?php
 if (!isset($pageName)) {
   $pageName = '';
 }
 ?>
-
 <style>
   nav.navbar ul.navbar-nav .nav-link.active {
     background-color: blue;
@@ -34,7 +33,10 @@ if (!isset($pageName)) {
         <ul class="navbar-nav mb-2 mb-lg-0">
           <?php if (isset($_SESSION['admin'])) : ?>
             <li class="nav-item">
-              <a class="nav-link <?= $pageName == 'login' ? 'active' : '' ?>" href="../practises/logout.php">登出</a>
+              <a class="nav-link"><?= $_SESSION['admin']['nickname'] ?></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?= $pageName == 'login' ? 'active' : '' ?>" href="../practice/logout.php">登出</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -43,7 +45,6 @@ if (!isset($pageName)) {
           <?php endif ?>
 
         </ul>
-
       </div>
     </div>
   </nav>
