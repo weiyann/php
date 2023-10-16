@@ -21,11 +21,11 @@ if(!empty($_FILES) and !empty($_FILES['avatar'])){
     if(!empty($exts[$_FILES['avatar']['type']])){
         $ext=$exts[$_FILES['avatar']['type']];// 副檔名
         # 隨機的主檔名
-        $f =sha1($_FILES['avatar']['name']. uniqid());
+        $f =sha1($_FILES['avatar']['name']. uniqid()); //uniqid 唯一
         if(
             move_uploaded_file(
-            $_FILES['avatar']['tmp_name'],
-            $dir . $f. $ext
+            $_FILES['avatar']['tmp_name'], // 臨時路徑
+            $dir . $f. $ext // 目標路徑，新的文件名
         )
         ){
             $result['success']=true;
