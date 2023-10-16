@@ -10,6 +10,7 @@ $output = [
 
 # 告訴用戶端, 資料格式為 JSON
 header('Content-Type: application/json');
+
 /*
 if (empty($_POST['name']) or empty($_POST['email'])) {
   $output['errors']['form'] = '缺少欄位資料';

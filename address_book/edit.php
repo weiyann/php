@@ -39,7 +39,7 @@ $title = '編輯資料'
           <h5 class="card-title">編輯資料</h5>
 
           <form name="form1" onsubmit="sendData(event)">
-          <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+            <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
             <div class="mb-3">
               <label for="name" class="form-label">name</label>
               <input type="text" class="form-control" id="name" name="name" value=<?= htmlentities($row['name']) ?>>
@@ -63,7 +63,7 @@ $title = '編輯資料'
             </div>
             <div class="mb-3">
               <label for="address" class="form-label">address</label>
-              <textarea class="form-control" name="address" id="address" cols="30" rows="3"><?= htmlentities($row['address'] )?></textarea>
+              <textarea class="form-control" name="address" id="address" cols="30" rows="3"><?= htmlentities($row['address']) ?></textarea>
               <div class="form-text"></div>
             </div>
 
@@ -111,19 +111,19 @@ $title = '編輯資料'
 
     // TODO: 資料在送出之前, 要檢查格式
     let isPass = true; // 有沒有通過檢查
-    
-        if (name_in.value.length < 2) {
-          isPass = false;
-          name_in.style.border = '2px solid red';
-          name_in.nextElementSibling.innerHTML = '請填寫正確的姓名';
-        }
 
-        if (!validateEmail(email_in.value)) {
-          isPass = false;
-          email.style.border = '2px solid red';
-          email.nextElementSibling.innerHTML = '請填寫正確的 Email';
-        }
-    
+    if (name_in.value.length < 2) {
+      isPass = false;
+      name_in.style.border = '2px solid red';
+      name_in.nextElementSibling.innerHTML = '請填寫正確的姓名';
+    }
+
+    if (!validateEmail(email_in.value)) {
+      isPass = false;
+      email.style.border = '2px solid red';
+      email.nextElementSibling.innerHTML = '請填寫正確的 Email';
+    }
+
     // 非必填
     if (mobile_in.value && !validateMobile(mobile_in.value)) { //如果有值但不符合格式就錯誤，沒有值就不執行這個if
       isPass = false;
@@ -148,9 +148,9 @@ $title = '編輯資料'
         });
         if (data.success) {
           alert('資料編輯成功');
-          location.href = "./list.php"
+          //location.href = "./list.php"
         } else {
-          // alert('發生問題')
+          alert('資料沒有修改')
           for (let n in data.errors) {
             console.log(`n:${n}`);
             if (document.form1[n]) {

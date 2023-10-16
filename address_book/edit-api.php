@@ -3,9 +3,8 @@ require './parts/connect_db.php';
 
 # 告訴用戶端, 資料格式為 JSON
 header('Content-Type: application/json');
-echo json_encode($_POST);
-
-exit; // 結束程式
+//echo json_encode($_POST);
+//exit; // 結束程式
 
 $output = [
   'postData' => $_POST,
@@ -14,15 +13,15 @@ $output = [
   'errors' => []
 ];
 
-# 告訴用戶端, 資料格式為 JSON
-header('Content-Type: application/json');
-/*
-if (empty($_POST['name']) or empty($_POST['email'])) {
-  $output['errors']['form'] = '缺少欄位資料';
+//取得資料的 PK
+$sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
+if (empty($sid)) {
+  $output['errors']['sid'] = "沒有 PK";
   echo json_encode($output);
   exit;
 }
-*/
+
+
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
 $mobile = $_POST['mobile'] ?? '';
@@ -53,10 +52,13 @@ if (!$isPass) {
   exit;
 }
 
-$sql = "INSERT INTO `address_book`( `name`, `email`, `mobile`, `birthday`, `address`, `created_at`) 
-VALUES (
-  ?, ?, ?, ?, ?, NOW()
-)";
+$sql =  "UPDATE `address_book` SET 
+`name`=?,
+`email`=?,
+`mobile`=?,
+`birthday`=?,
+`address`=?
+WHERE `sid`=? ";
 
 $stmt = $pdo->prepare($sql);
 
@@ -66,9 +68,10 @@ $stmt->execute([
   $mobile,
   $birthday,
   $address,
+  $sid
 ]);
 
-
+$output['rowCount'] = $stmt->rowCount();
 $output['success'] = boolval($stmt->rowCount());
 echo json_encode($output);
 
