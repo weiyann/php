@@ -9,14 +9,14 @@ $exts = [
 ];
 
 header("Content-Type: application/json");
-$result = [
+$output = [
     'success'=>false,
     'file'=>''
 ];
 
 
 
-if(!empty($_FILES) and !empty($_FILES['avatar'])){
+if(!empty($_FILES) and !empty($_FILES['avatar']) and $_FILES['avatar']['error']==0){
 
     if(!empty($exts[$_FILES['avatar']['type']])){
         $ext=$exts[$_FILES['avatar']['type']];// 副檔名
@@ -28,11 +28,11 @@ if(!empty($_FILES) and !empty($_FILES['avatar'])){
             $dir . $f. $ext // 目標路徑，新的文件名
         )
         ){
-            $result['success']=true;
-            $result['file']=$f. $ext;
+            $output['success']=true;
+            $output['file']=$f. $ext;
         }
     }
 }
 
-echo json_encode($result);
+echo json_encode($output);
 
