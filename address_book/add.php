@@ -130,7 +130,7 @@ $title = '新增'
         });
         if (data.success) {
           alert('資料新增成功');
-          location.href = "./list.php"
+          //location.href = "./list.php"
         } else {
           // alert('發生問題')
           for (let n in data.errors) {

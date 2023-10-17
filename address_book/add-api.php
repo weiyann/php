@@ -63,7 +63,7 @@ $stmt->execute([
   $address,
 ]);
 
-
+$output['lastInsertId'] = $pdo->lastInsertId();# 取得最新資料的 primary key
 $output['success'] = boolval($stmt->rowCount());
 echo json_encode($output);
 
