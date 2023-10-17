@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="cursor: pointer;" onclick="photos.click()">點選上傳多張圖片</div>
+
+    <form name="form1" hidden>
+      <input type="file" id="photos" name="photos[]" multiple onchange="uploadFile()"/>
+    </form>
+
+    <div style="width: 300px">
+      <img src="" alt="" id="myimg" width="100%" />
+    </div>
+    <script>
+      function uploadFile() {
+        const fd = new FormData(document.form1);
+
+        fetch("upload-img-api-2.php", {
+          method: "POST",
+          body: fd, // enctype="multipart/form-data"
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            console.log(data)
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -19,7 +19,7 @@ if (!empty($_FILES) and !empty($_FILES['photos'])) {
 
     foreach ($_FILES['photos']['name'] as $i => $name) {
 
-      if (!empty($exts[$_FILES['photos']['type'][$i]])) {
+      if (!empty($exts[$_FILES['photos']['type'][$i]])and $_FILES['photos']['error'][$i]==0) {
         $ext = $exts[$_FILES['photos']['type'][$i]]; // 副檔名
 
         # 隨機的主檔名
