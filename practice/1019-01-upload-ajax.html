@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form name="dataForm" onsubmit="return false;">
+      <input id="pic1" name="pic1" style="width: 600px;">
+      <div style="cursor: pointer;" onclick="triggerUpload('pic1')">點選上傳第一張圖</div>
+      <div style="width: 300px">
+        <img src="" alt="" id="pic1_img" width="100%" />
+      </div>
+      <br>
+      <input id="pic2" name="pic2"  style="width: 600px;">
+      <div style="cursor: pointer;" onclick="triggerUpload('pic2')">點選上傳第二張圖</div>
+      <div style="width: 300px">
+        <img src="" alt="" id="pic2_img" width="100%" />
+      </div>
+      <br>
+      <input id="pic3" name="pic3"  style="width: 600px;">
+      <div style="cursor: pointer;" onclick="triggerUpload('pic3')">點選上傳第 3 張圖</div>
+      <div style="width: 300px">
+        <img src="" alt="" id="pic3_img" width="100%" />
+      </div>
+      <br>
+      <input id="pic4" name="pic4"  style="width: 600px;">
+      <div style="cursor: pointer;" onclick="triggerUpload('pic4')">點選上傳第 4 張圖</div>
+      <div style="width: 300px">
+        <img src="" alt="" id="pic4_img" width="100%" />
+      </div>
+      <br>
+    </form>
+    <form name="form1" hidden>
+      <input type="file" name="avatar" onchange="uploadFile()"/>
+    </form>
+    <script>
+      let uploadFieldId; // 欄位 Id
+      function triggerUpload(fid){
+        uploadFieldId = fid;
+        document.form1.avatar.click();
+      }
+      function uploadFile() {
+        const fd = new FormData(document.form1);
+        fetch("upload-img-api-1.php", {
+          method: "POST",
+          body: fd, // enctype="multipart/form-data"
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.success) {
+              if(uploadFieldId){
+                document.dataForm[uploadFieldId].value = data.file
+                document.querySelector(`#${uploadFieldId}_img`).src = "/mfee43-php/uploads/" + data.file;
+              }
+              
+              
+              
+            }
+            uploadFieldId = null;
+          });
+      }
+    </script>
+  </body>
+</html>
